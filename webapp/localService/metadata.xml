@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0"
+    xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+    xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+    xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="SRA016_PRICE_AVAIL_SRV" xml:lang="fr" sap:schema-version="1"
+            xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="Customer" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Division"/>
+                    <PropertyRef Name="DistributionChannel"/>
+                    <PropertyRef Name="SalesOrganization"/>
+                    <PropertyRef Name="CustomerID"/>
+                </Key>
+                <Property Name="Division" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Sect.d'activité" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DistributionChannelName" Type="Edm.String" MaxLength="20" sap:label="Nom du canal de distribution" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DistributionChannel" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Canal de distribution" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SalesOrganizationName" Type="Edm.String" MaxLength="20" sap:label="Nom de l'organisation commerciale" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SalesOrganization" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Organisation commerciale" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DivisionName" Type="Edm.String" MaxLength="20" sap:label="Nom du secteur d'activité" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="City" Type="Edm.String" MaxLength="40" sap:label="Localité" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PostalCode" Type="Edm.String" MaxLength="10" sap:label="Code postal" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CityZip" Type="Edm.String" sap:label="Ville/code postal" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CustomerID" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="ID client" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CustomerName" Type="Edm.String" MaxLength="35" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Nom du client" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <NavigationProperty Name="Products" Relationship="SRA016_PRICE_AVAIL_SRV.Customer_to_Product" FromRole="FromRole_Customer_to_Product" ToRole="ToRole_Customer_to_Product"/>
+            </EntityType>
+            <EntityType Name="ProductAvailability" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CustomerID"/>
+                    <PropertyRef Name="ProductID"/>
+                </Key>
+                <Property Name="Price" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:label="Prix" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="TotalPrice" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:label="Prix global" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:label="Devise" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+                <Property Name="CustomerID" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Client" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ContactNo" Type="Edm.String" sap:label="Contact Phone Number" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4" sap:label="Site" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ProductID" Type="Edm.String" Nullable="false" MaxLength="18" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Article" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="RequiredDate" Type="Edm.String" sap:label="Character field, 8 characters long (CHAR8)" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="RequiredQty" Type="Edm.Decimal" Precision="13" Scale="3" sap:label="Requirement quantity for availability check (MNG05)" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="EstimatedDate" Type="Edm.String" sap:label="Committed Date (DAT05)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AvailableQty" Type="Edm.Decimal" Precision="13" Scale="3" sap:label="Committed Quantity (MNG06)" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Customerprice" Type="Edm.Decimal" Nullable="false" Precision="16" Scale="3" sap:unit="Currency" sap:label="Prix client" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SalesOrganization" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Org.commerciale" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DistributionChannel" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Canal distrib." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Division" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Sect.d'activité" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ProductAttribute" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CustomerID"/>
+                    <PropertyRef Name="Characteristic"/>
+                </Key>
+                <Property Name="SalesOrganization" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Org.commerciale" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DistributionChannel" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Canal distrib." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Division" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Sect.d'activité" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CustomerID" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Client" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="ObjectTable" Type="Edm.String" MaxLength="30" sap:label="Table" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ClassNum" Type="Edm.String" Nullable="false" MaxLength="18" sap:label="Classe" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ClassType" Type="Edm.String" Nullable="false" MaxLength="3" sap:label="Catég. classe" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ObjectKey" Type="Edm.String" Nullable="false" MaxLength="50" sap:label="Objet" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Characteristic" Type="Edm.String" Nullable="false" MaxLength="30" sap:label="Caractéristique" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ValueChar" Type="Edm.String" MaxLength="30" sap:label="Valeur caract." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CharactDescr" Type="Edm.String" MaxLength="30" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Désignation" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ValueFrom" Type="Edm.Double" sap:label="De la valeur" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ValueTo" Type="Edm.Double" sap:label="A la valeur" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CurrencyFrom" Type="Edm.String" MaxLength="5" sap:label="Devise" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+                <Property Name="CurrencyTo" Type="Edm.String" MaxLength="5" sap:label="Devise" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+                <Property Name="UnitFrom" Type="Edm.String" MaxLength="3" sap:label="UQ base" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="UnitTo" Type="Edm.String" MaxLength="3" sap:label="UQ base" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="ProductID" Type="Edm.String" Nullable="false" MaxLength="18" sap:label="Article" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+            </EntityType>
+            <EntityType Name="Product" m:HasStream="true" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="SalesOrganization"/>
+                    <PropertyRef Name="DistributionChannel"/>
+                    <PropertyRef Name="Division"/>
+                    <PropertyRef Name="CustomerID"/>
+                    <PropertyRef Name="ProductID"/>
+                </Key>
+                <Property Name="MyProductNo" Type="Edm.String" MaxLength="35" sap:label="Mon numéro de produit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ProductReferenceNo" Type="Edm.String" MaxLength="18" sap:label="Numéro de référence du produit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="SalesOrganization" Type="Edm.String" Nullable="false" MaxLength="4" sap:label="Org.commerciale" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="DistributionChannel" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Canal distrib." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Division" Type="Edm.String" Nullable="false" MaxLength="2" sap:label="Sect.d'activité" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BaseUOMDesc" Type="Edm.String" MaxLength="30" sap:label="Unité de mesure" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="PrdSearch" Type="Edm.String" MaxLength="40" sap:label="Critères de recherche du produit" sap:creatable="false" sap:updatable="false" sap:sortable="false"/>
+                <Property Name="MimeType" Type="Edm.String" MaxLength="128" sap:label="Type MIME" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="CustomerID" Type="Edm.String" Nullable="false" MaxLength="10" sap:label="Numéro du client" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ProductID" Type="Edm.String" Nullable="false" MaxLength="18" sap:label="Article" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="ProductDesc" Type="Edm.String" MaxLength="40" m:FC_TargetPath="SyndicationTitle" m:FC_KeepInContent="true" sap:label="Désignation" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="BaseUom" Type="Edm.String" MaxLength="3" sap:label="UQ base" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="unit-of-measure"/>
+                <Property Name="ProductListPrice" Type="Edm.Decimal" Precision="16" Scale="3" sap:unit="Currency" sap:label="Prix catalogue du produit" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:label="Devise doc." sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/>
+                <NavigationProperty Name="ProductAvailabilities" Relationship="SRA016_PRICE_AVAIL_SRV.Product_to_ProductAvailability" FromRole="FromRole_Product_to_ProductAvailability" ToRole="ToRole_Product_to_ProductAvailability"/>
+                <NavigationProperty Name="ProductAttributes" Relationship="SRA016_PRICE_AVAIL_SRV.Product_To_ProductAttribute" FromRole="FromRole_Product_To_ProductAttribute" ToRole="ToRole_Product_To_ProductAttribute"/>
+            </EntityType>
+            <Association Name="Customer_to_Product" sap:content-version="1">
+                <End Type="SRA016_PRICE_AVAIL_SRV.Customer" Multiplicity="1" Role="FromRole_Customer_to_Product"/>
+                <End Type="SRA016_PRICE_AVAIL_SRV.Product" Multiplicity="*" Role="ToRole_Customer_to_Product"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Customer_to_Product">
+                        <PropertyRef Name="SalesOrganization"/>
+                        <PropertyRef Name="Division"/>
+                        <PropertyRef Name="DistributionChannel"/>
+                        <PropertyRef Name="CustomerID"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Customer_to_Product">
+                        <PropertyRef Name="SalesOrganization"/>
+                        <PropertyRef Name="Division"/>
+                        <PropertyRef Name="DistributionChannel"/>
+                        <PropertyRef Name="CustomerID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Product_to_ProductAvailability" sap:content-version="1">
+                <End Type="SRA016_PRICE_AVAIL_SRV.Product" Multiplicity="1" Role="FromRole_Product_to_ProductAvailability"/>
+                <End Type="SRA016_PRICE_AVAIL_SRV.ProductAvailability" Multiplicity="*" Role="ToRole_Product_to_ProductAvailability"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Product_to_ProductAvailability">
+                        <PropertyRef Name="DistributionChannel"/>
+                        <PropertyRef Name="Division"/>
+                        <PropertyRef Name="SalesOrganization"/>
+                        <PropertyRef Name="CustomerID"/>
+                        <PropertyRef Name="ProductID"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Product_to_ProductAvailability">
+                        <PropertyRef Name="DistributionChannel"/>
+                        <PropertyRef Name="Division"/>
+                        <PropertyRef Name="SalesOrganization"/>
+                        <PropertyRef Name="CustomerID"/>
+                        <PropertyRef Name="ProductID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <Association Name="Product_To_ProductAttribute" sap:content-version="1">
+                <End Type="SRA016_PRICE_AVAIL_SRV.Product" Multiplicity="1" Role="FromRole_Product_To_ProductAttribute"/>
+                <End Type="SRA016_PRICE_AVAIL_SRV.ProductAttribute" Multiplicity="*" Role="ToRole_Product_To_ProductAttribute"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_Product_To_ProductAttribute">
+                        <PropertyRef Name="ProductID"/>
+                        <PropertyRef Name="SalesOrganization"/>
+                        <PropertyRef Name="Division"/>
+                        <PropertyRef Name="DistributionChannel"/>
+                        <PropertyRef Name="CustomerID"/>
+                    </Principal>
+                    <Dependent Role="ToRole_Product_To_ProductAttribute">
+                        <PropertyRef Name="ProductID"/>
+                        <PropertyRef Name="SalesOrganization"/>
+                        <PropertyRef Name="Division"/>
+                        <PropertyRef Name="DistributionChannel"/>
+                        <PropertyRef Name="CustomerID"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="SRA016_PRICE_AVAIL_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="Customers" EntityType="SRA016_PRICE_AVAIL_SRV.Customer" sap:label="Clients" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="ProductAvailabilityCollection" EntityType="SRA016_PRICE_AVAIL_SRV.ProductAvailability" sap:label="Disponibilité du produit" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:requires-filter="true" sap:content-version="1"/>
+                <EntitySet Name="ProductAttributeCollection" EntityType="SRA016_PRICE_AVAIL_SRV.ProductAttribute" sap:label="Attribut produit" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:requires-filter="true" sap:content-version="1"/>
+                <EntitySet Name="ProductCollection" EntityType="SRA016_PRICE_AVAIL_SRV.Product" sap:label="Produits" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:requires-filter="true" sap:content-version="1"/>
+                <AssociationSet Name="Product_To_ProductAttributeSet" Association="SRA016_PRICE_AVAIL_SRV.Product_To_ProductAttribute" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ProductCollection" Role="FromRole_Product_To_ProductAttribute"/>
+                    <End EntitySet="ProductAttributeCollection" Role="ToRole_Product_To_ProductAttribute"/>
+                </AssociationSet>
+                <AssociationSet Name="Customer_to_ProductSet" Association="SRA016_PRICE_AVAIL_SRV.Customer_to_Product" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="Customers" Role="FromRole_Customer_to_Product"/>
+                    <End EntitySet="ProductCollection" Role="ToRole_Customer_to_Product"/>
+                </AssociationSet>
+                <AssociationSet Name="Product_to_ProductAvailabilitySet" Association="SRA016_PRICE_AVAIL_SRV.Product_to_ProductAvailability" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ProductCollection" Role="FromRole_Product_to_ProductAvailability"/>
+                    <End EntitySet="ProductAvailabilityCollection" Role="ToRole_Product_to_ProductAvailability"/>
+                </AssociationSet>
+            </EntityContainer>
+            <atom:link rel="self" href="./sap/opu/odata/sap/SRA016_PRICE_AVAIL_SRV/$metadata"
+                xmlns:atom="http://www.w3.org/2005/Atom"/>
+                <atom:link rel="latest-version" href="./sap/opu/odata/sap/SRA016_PRICE_AVAIL_SRV/$metadata"
+                    xmlns:atom="http://www.w3.org/2005/Atom"/>
+                </Schema>
+            </edmx:DataServices>
+        </edmx:Edmx>
